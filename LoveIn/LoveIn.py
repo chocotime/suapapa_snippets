@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: cp949 -*-
+# -*- coding: utf-8 -*-
 
 # LoveIn.py: calurate love match percentage
 #
@@ -38,15 +38,15 @@ _dicStrokeCnt = {
     _mo.YU :3,
     _mo.EU :1,
     _mo.I :1,
-    _mo.E :3,        
+    _mo.E :3,
 }
-    
+
 def _getStrokeCnt(koChr):
-    ''' ÇÑ±Û ÇÑ ±ÛÀÚÀÇ È¹¼ö¸¦ ¹İÈ¯ '''
+    ''' í•œê¸€ í•œ ê¸€ìì˜ íšìˆ˜ë¥¼ ë°˜í™˜ '''
     strokeCnt = 0
     f, m, l = hangul.split(koChr)
     for ja in (f, l):
-        if not ja: continue #Á¾¼ºÀÌ ¾ø´Â °æ¿ì
+        if not ja: continue #ì¢…ì„±ì´ ì—†ëŠ” ê²½ìš°
         if ja in _ja.MultiElement.keys():
             for s in _ja.MultiElement[ja]:
                 strokeCnt += _dicStrokeCnt[s]
@@ -60,15 +60,15 @@ def _getStrokeCnt(koChr):
     return strokeCnt
 
 def _getInt(liNum):
-    ''' ¼ıÀÚ ¹è¿­À» ¼ıÀÚ·Î ÇÕÇØ¼­ ¹İÈ¯ '''
+    ''' ìˆ«ì ë°°ì—´ì„ ìˆ«ìë¡œ í•©í•´ì„œ ë°˜í™˜ '''
     iNum = 0
     for i in liNum:
         iNum *= 10
         iNum += i
     return iNum
-        
+
 def _doLoveSum(liNum):
-    ''' È¹¼ö ¸®½ºÆ®¸¦ ¹Ş¾Æ 100ÀÌÇÏ°¡ µÉ ¶§±îÁö ÁÙ¿©°¨ '''
+    ''' íšìˆ˜ ë¦¬ìŠ¤íŠ¸ë¥¼ ë°›ì•„ 100ì´í•˜ê°€ ë  ë•Œê¹Œì§€ ì¤„ì—¬ê° '''
     # TODO: center alignment
     print liNum
     if _getInt(liNum) > 100:
@@ -80,29 +80,29 @@ def _doLoveSum(liNum):
         return _getInt(liNum)
 
 def matchByName (name1, name2, encoding = None):
-    ''' µÎ ÀÌ¸§ÀÇ ±ÃÇÕÀ» Ç¥½Ã '''
+    ''' ë‘ ì´ë¦„ì˜ ê¶í•©ì„ í‘œì‹œ '''
     if encoding:
         name1 = name1.decode(encoding)
         name2 = name2.decode(encoding)
-        
+
     liNamePool = []
     for i in range(len(name1)+len(name2)):
         if i % 2 == 0:
             liNamePool.append(name1[i/2])
         else:
             liNamePool.append(name2[i/2])
-        
+
     print '  '.join(liNamePool)
     loveSum = _doLoveSum(map(_getStrokeCnt, liNamePool))
     print loveSum, '%'
 
 def _test():
-    matchByName ("¿¬Á¤ÈÆ".decode('cp949'), "ÇÑ°¡ÀÎ".decode('cp949'))
-    matchByName ("Á¤Çüµ·".decode('cp949'), "¹®±Ù¿µ".decode('cp949'))
-    matchByName ("±èÁ¾¹Î".decode('cp949'), "Çö¿µ".decode('cp949'))
-    matchByName ("ÀÌ¸í¹Ú".decode('cp949'), "°­¸¸¼ö".decode('cp949'))
-    matchByName ("»ª°¡", "½ÅÁö", "cp949")
-    matchByName ("Á¦½ÃÄ«", "¹Ú¸í¼ö", "cp949")
-    
+    matchByName ("ì—°ì •í›ˆ", "í•œê°€ì¸", "utf-8")
+    matchByName ("ì •í˜•ëˆ", "ë¬¸ê·¼ì˜", "utf-8")
+    matchByName ("ê¹€ì¢…ë¯¼", "í˜„ì˜", "utf-8")
+    matchByName ("ì´ëª…ë°•", "ê°•ë§Œìˆ˜", "utf-8")
+    matchByName ("ë¹½ê°€", "ì‹ ì§€", "utf-8")
+    matchByName ("ì œì‹œì¹´", "ë°•ëª…ìˆ˜", "utf-8")
+
 if __name__ == '__main__':
-    _test()        
+    _test()
