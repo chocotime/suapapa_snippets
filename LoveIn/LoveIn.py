@@ -37,7 +37,8 @@ _dicStrokeCnt = {
     _mo.U :2,
     _mo.YU :3,
     _mo.EU :1,
-    _mo.I :1
+    _mo.I :1,
+    _mo.E :3,        
 }
     
 def _getStrokeCnt(koChr):
@@ -101,6 +102,7 @@ def _test():
     matchByName ("김종민".decode('cp949'), "현영".decode('cp949'))
     matchByName ("이명박".decode('cp949'), "강만수".decode('cp949'))
     matchByName ("빽가", "신지", "cp949")
+    matchByName ("제시카", "박명수", "cp949")
     
 if __name__ == '__main__':
     _test()        
