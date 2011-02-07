@@ -53,7 +53,9 @@ if __name__ == '__main__':
     else:
         imgRet = pasteWithNoGlare(imgFrm, imgCap)
 
-    imgRet = imgRet.rotate(-opts.rotate)
+    if opts.rotate:
+        imgRet = imgRet.rotate(-opts.rotate)
+
     imgRet.save(opts.out)
 
 # vim: et sw=4 fenc=utf-8:
